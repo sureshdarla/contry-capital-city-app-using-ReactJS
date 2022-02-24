@@ -31,41 +31,52 @@ const countryAndCapitalsList = [
 ]
 
 class Capitals extends Component {
-  state = {countryName: countryAndCapitalsList[0].country}
+  state = {
+    activeCapitalId: countryAndCapitalsList[0].id,
+  }
 
   onChangeCapitalChooseCountry = event => {
-    const capital = event.target.value
+    this.setState({activeCapitalId: event.target.value})
+  }
 
-    const filteredCountry = countryAndCapitalsList.filter(
-      eachItem => eachItem.capitalDisplayText === capital,
+  getCountry = () => {
+    // console.log('get country logged')
+    const {activeCapitalId} = this.state
+
+    const activeCountryAndCapital = countryAndCapitalsList.find(
+      eachCapital => eachCapital.id === activeCapitalId,
     )
 
-    this.setState({countryDetails: [...filteredCountry]})
+    return activeCountryAndCapital.country
   }
 
   render() {
-    // const {countryDetails} = this.state
-    const {countryName} = this.state
+    const {activeCapitalId} = this.state
+    const country = this.getCountry(activeCapitalId)
+    console.log(country)
 
     return (
       <div className="country-capital-app">
         <div className="form-content">
-          <form className="form-container">
-            <select onChange={this.onChangeCapitalChooseCountry}>
-              {countryAndCapitalsList.map(eachItem => (
-                <option value={eachItem.capitalDisplayText} key={eachItem.id}>
-                  {eachItem.capitalDisplayText}
-                </option>
-              ))}
-            </select>
-            <span>is capital of which country?</span>
-          </form>
+          <select
+            value={activeCapitalId}
+            onChange={this.onChangeCapitalChooseCountry}
+          >
+            {countryAndCapitalsList.map(eachItem => (
+              <option value={eachItem.id} key={eachItem.id}>
+                {eachItem.capitalDisplayText}
+              </option>
+            ))}
+          </select>
+          <span>is capital of which country?</span>
+
           <div>
-            <p>{countryName}</p>
+            <p className="country-name">{country}</p>
           </div>
         </div>
       </div>
     )
   }
 }
+
 export default Capitals

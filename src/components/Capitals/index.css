@@ -13,6 +13,7 @@
   padding: 20px;
   height: 200px;
   width: fit-content;
+  box-shadow: 3px 4px 5px 6px rosybrown;
 }
 select {
   border: 1px solid skyblue;
@@ -28,4 +29,12 @@ span {
 
   font-weight: 600;
   padding-left: 4px;
+}
+.country-name {
+  font-family: 'Roboto';
+  font-size: 30px;
+  font-weight: 600;
+  color: blue;
+  border: 3px solid none;
+  text-shadow: 5px 4px 2px skyblue;
 }
